@@ -1,0 +1,182 @@
+1. buat dataabse untuk wordpress
+2. buka wordpress di browser melalui localhist
+3. selanjtnya akan muncul wordrpress instalation wizard
+
+membuat theme baru
+1.navigate ke wp-content/theme
+2.buat folder baru untuk the yang akan dibuat 
+3. untuk mengaktifkan theme yang dibuat navigate ke dahsboard admin http://localhost/wp-admin/ pada browser, pilih appearance, pilih theme, pilih theme yang akan digunakan
+4. coba buka halaman clien home, maka theme akan berubah 
+
+
+pertama kita akan mencoba untuk menapilkan post pada halaman home eddit file /wp-content/themes/belajarWordpress/index.php
+
+menampilkan header get_header();
+menampilkan footer get_footer();
+#mengedit default header dan footer
+buat file header.php didalam folder theme contoh /belajarWordpress/header.php
+buat file footer.php didalam folder theme /belajarWordpress/footer.php
+
+menginclude staatic file seperti style da javascript
+buat file baru functions.php contoh belajarWordpress/functions.php
+
+menambahkan navigation menu di header 
+edit file header.php tambahkan nav element contoh belajarWordpress/header.php
+tambhakan  pages di admin dashboard di menu pages 
+navigate ke function.php register/tambhkan theme menu location 'primary' ato 'footer'
+pada admin dashboard dnavigate ke appearance lalu menu, pilih pagaes mana yang akan diletaakn di location 'primary'
+
+menambahkan navigation menu di footer
+edit file footer.php tambahkan nav element contoh belajarWordpress/header.php
+tambhakan pages di admin dashboard di menu pages
+navigate ke function.php register/tambahkan theme menu location 'primary' ato 'footer'
+pada admin dashboard dnavigate ke appearance lalu menu, pilih pagaes mana yang akan diletaakn di location 'footer'
+
+membuat tampilan pages berbeda dengan tampilan index
+buat file page.php contohnya belajarWordpress/page.php
+
+membuat tiap pages dengan file tersendiri
+caranya adalah dengan membuat file dengan nama 'page-namaPage.php' page-blabla blabla dapat digantidengan nama page autupun id page
+contoh di file ini adlah page-portofolio dan page-about-us
+
+
+membuat satu file php atau satu layout untuk bebrapa pages atau disebut dengan spesial layout
+buat file dengan nama special-template
+pada projext ini kita akan membuat layout atau special-template yang sama untuk page faq, privacy dan term & condition
+navigate ke dashboard admin
+navigate ke pages
+pilih page faq pilih setting pilih page atributes ganti default page menajdi sepcial layout
+pilih page privacy&policy pilih setting pilih page atributes ganti default page menajdi sepcial layout
+pilih page term&condition pilih setting pilih page atributes ganti default page menajdi sepcial layout
+
+membuat child page menu
+buat 3 page baru yang akan dijadikan child page apda admin dashboard
+disini kita akan membuat 3 child page dengan nama mission statement, our future dan our history yang akan menjadi child page dari page abut us
+pada ketiga page tersebut pilih setting, page attributes, pilih parent page about us
+edit file page-about-us.php
+buat function custom untuk menampilkan parent id jika suatu page memiliki parent, buat functions tersebut di functions.php dengan nama get_top_ancestor_id();
+
+menampilkan tanggal dibuatnya suatu post, menampilkan author dan category dari post tersebut
+edit file content.php liat contohnya content.php
+tambahkan beberapa category di admin dashboar pilih posts pilih categories, disini kita akan menambhakn category news dan opinion
+edit tiap post untuk menambhkan category dimasing masing post carannya ke admin dashboard pilih posts, pilih post yang akan ditambhakan categorynya, pilih setting, pilih categories, centang category yang ingin ditambahkan
+
+membuat archive.php
+file archive.php dibuat untuk membuat tampilan custom jika user memilih sutau archive, archive disini maskdunya adalah kumpulan post berdasarkan category kumpulan post berdasarkan author, kumpulan post berdasarkan tag, kumpulan pst berdasarkan hari, tanggal, bulan, tahun dll.
+pertm buat archive.php conthonya dih file archive.php
+
+Membuat read more link dan excerpts atau rangkuman
+cara 1 menampilkan exerpt 
+navigate to admin dashboard pilh post yang akan ditambahkan excerpts
+pilih setting pilih excertps, pda kolom yang tersedia, masukkan excerpts yang ingin ditampilkan
+maka saat post dimuat post akan otomatis menampilkan excerpts
+cara 2
+edit content.php liat contohnya di content.php
+*opsional menentukan berapa banyak karakter dari excerpts
+edit functions.php contohny liat functions.php function custom_exceprt_length()
+
+
+membuat feature image
+feature image adalah fitur tambahan untuk menampilkan thumbnail suatu post, dan kita dapat mengatur sperti apa thumbnail tsb terlihat
+navigate to functions.php buat function buat function learningWordPress_setup() tambahkan function add_theme_supports('post_thumbnails') di function tsb;
+navigate ke admin dashboard pilih post yang akan ditambahkan fitu image,pilih setting,pilih feature images, pilh gabar yang akan ditambahkan, update post
+edit file content.php tambahkan function untuk menampilkan feture images
+edit file single.php tambahkan function untuk menampilkan feture images
+
+membuat searchbar
+pertama edit header.php, tambahkan functionget_search_form
+membuat custom search baru
+buat function searchform.php edit file tersebut
+mengntrol outpu dari search
+buat file search.php edit file tersebut
+
+menggunakan function get_template_part()
+function get_template_part mirip seperti partial layout pada nodejs dan laravel
+contohnya liat pada index.php liat, pada file tersebut kita menagmbil content.php dan menginclude kanya didalam index.php
+kita akan menginclude content.php di beberapa file content.php, search.php, archive.php 
+
+menggunakan get_post_format();
+post_format ssat bermafaat jika kita memiliki post dengan format yang berbeda
+contohnya kita bisa memiliki post seperti post normal, gallery, aside, status quote sebagai format dari post
+pada project ini kita akan menggukan post format aside, gallery, dan link
+pertama kta akan mengaktivasi fitur post format tambahakan function add_theme_support('post-formats', array('aside', galler, link)); didalam function learnignWordpressSetup() di dalam functions.php
+selanjtnya kita akan membuat contoh post dengan format aside. navigate to admin dashboard buat post baru tanpa judul, pilh setting, piih format aside
+untuk mengedit tampilan aside agar berbeda dari tampilan post biasa
+buat file content-aside.php
+selanjtnya kita akan membuat contoh post dengan format link. navigate to admin dashboard buat post baru, pada colomn kontent kita isikan pargraf dan kita attach paragraf tersebut dengan suatu link,pilh setting, piih format link
+untuk mengedit tampilan link agar berbeda dari tampilan post biasa
+buat file content-link.php
+selanjtnya kita akan membuat contoh post dengan format gallery. navigate to admin dashboard buat post baru dengan mengisi kumpulan gambar dan nama gambar dari gambar tsb, pilh setting, piih format gallery
+untuk mengedit tampilan gallery agar berbeda dari tampilan post biasa
+buat file content-gallery.php
+tambahkan function get_post_format() didalam function get_template_part() di file content.php, search.php, archive.php agar setiap sebuah post ditampilkan layout yang digunakan dapat disesuaikan secara dynamic dengan formatnya
+
+menggunakan widget
+widget merupakan self contain chunk of content contonhya side bar yang memuat category, beberapa post
+kita akan membuat lokasi untu widget, kita akan menambahkan widget pada sidebar dan di footer
+pertama kita akan merigester lokasi yang kita buat pada functions.php di dalam function ourWidgetInit()
+untuk menambahkan widget di sidebar buat file sidebar.php
+kemudian navigate ke index.php lalu edit file  tersebut panggil id widget sidebar1 yang sudah didaftarkan pada functions.php
+navigate ke footer.php lalu edit file tersebut panggil id widget footer1, footer2, footer3, footer4 yang sudah didaftarkan pada functions.php
+untuk menambahkan isi dari  widget kita bisa navigate ke admin dashboar pilih appearance, pilih widget
+kemudian pilih widget yang akan digunakan lalu pilih dimana akan dilettakan widget tersebut apakah diside bar atau di footer dan lain - lain
+
+custom homepage tutorial
+membuat custom home page disini kita todak akan menggunakan index.php sebagai homepage tetapi membuat sebuah custom homepage
+pertama navigate ke admin dashboard buat post dengan title Home dengan konten bebas
+kemudian buat post baru dengan title Blog tanpa konten
+kemudian navgate ke settings, pilih reading, pada bagian your home page display pilih a static file
+plih page Home yang dibuat sebagai homepage, lalu pilih page Bog yang baru dibuat sebagai posts page
+kemudian navigate ke appearance, pilih menu, tambahkan page blog pada primary menu link/ navbar di bagian header
+untuk mengcustom layout dari homepage buat file dengannama front-page.php edit file tersebut
+
+menggunakan WP_query()
+Wp_Query() digunakan untuk melakukan kostumisasi dari loop normal yang dimiliki wordpress
+pada projet ini kita akan mencoba menampilakan
+2 post paling baru dengan category opinion  pada front-page
+2 post paling baru dengan category news  pada front-page
+edit file front-page.php
+
+menambah color picker untuk merubah appearnce dari website
+pada procjet ini kita akan menambahkan color picker untuk dapat merubah warna link danbutto
+edit functions.php tambahkan function learnigWordpress_customize_register
+tambahkan function learningWordPress_customize_css() pada functions.css memberi tahu html ement mana yang akan dirubah warnanya
+navigate ke admin dashboard, pilih apperance, pilih customize, pada sidebar pilih standard colors, dari satndar color kita bisa mengatur warna dari link dan button
+
+membuat pagination
+cara 1
+tambahkan function next_post_link() untuk ke halaman selanjutnya di halaman yang memuat post yang adakn ditambhkan pagination
+tambahkan function previous_post_link() untuk ke halaman sebelumnya di halaman yang memuat post yang adakn ditambhkan pagination
+cara2
+tambahkan function paginate_links() untuk menampilkan pagination dengan button next, prevoious dan angka halman, di halaman yang memuat post yang adakn ditambhkan pagination
+untuk menentukan jumlah post maskimal perhaman navigate ke admin dashboard pilih settings, pilih reading, pilih Blogs pages show at most tentukan angkanya sesuai kebtuhan
+cara3 menggunakan WP_Query
+kita akn menggunakan qp_quer untuk membuat cuom pagination
+kita akan mengaplikasikanya di haman about us di file page-about-us.php
+edit file tsb
+kita akan membuat pagination untuk post dengan category about yang ditapilkan di halaman about us
+untuk menentukan jumlah post maskimal perhaman navigate ke admin dashboard pilih settings, pilih reading, pilih Blogs pages show at most tentukan angkanya sesuai kebtuhan
+
+Tambahkan beberapa post dengan category About dari admin dashboard
+
+membuat Custom editable content
+menambahkan content custom emlalui menu appearance pada admin dashbboard
+contohnyada adi di halaman front page
+blm dibuat dokumnetasi cek videonya https://www.youtube.com/watch?v=YzNfIM_9TaM&list=PLpcSpRrAaOaqMA4RdhSnnNcaqOVpX7qi5&index=18
+
+membuat the author box
+menambahkan About the author box yang meuat foto author dan beberapa post yang dibuatnya pada detail post
+blm dibuat dokumentasinya sementara cek videonya https://www.youtube.com/watch?v=mQTxqfNlIdk&list=PLpcSpRrAaOaqMA4RdhSnnNcaqOVpX7qi5&index=19
+
+
+
+
+
+
+
+
+
+
+
+
+
